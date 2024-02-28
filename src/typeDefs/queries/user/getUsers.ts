@@ -1,0 +1,1 @@
+export const usuarios : string = `usuarios: [User]`;

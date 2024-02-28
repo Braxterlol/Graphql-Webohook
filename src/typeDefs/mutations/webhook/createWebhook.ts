@@ -1,0 +1,1 @@
+export const createWebhook : string = `createWebhook(id_usuario: ID!, url: String!) : Webhook `;

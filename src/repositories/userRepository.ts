@@ -33,3 +33,23 @@ export const createUser = async (
     throw new Error(err);
   }
 };
+
+export const update = async (args: any): Promise<void> => {
+  try {
+    const { id, email, password } = args;
+    const query = 'UPDATE users SET email = ?, password = ? WHERE id = ?';
+    await db.execute(query,[email, password, id]);
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const destroy = async (args: any): Promise<void> => {
+  try {
+    const id = args.id;
+    const query = 'DELETE FROM users WHERE id = ?';
+    await db.execute(query,[id]);
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}

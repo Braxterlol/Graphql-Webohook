@@ -1,0 +1,1 @@
+export const createEvent : string = ` createEvent(name: String ) : Event`;
