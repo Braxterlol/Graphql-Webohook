@@ -36,3 +36,14 @@ export const createWebhookEvent = async (
     throw new Error(error);
   }
 };
+
+
+export const getByEvent = async (id: number ) : Promise<any> => {
+  try {
+    const query = `SELECT wh.url, e.name FROM webhook_event AS we INNER JOIN webhook AS wh ON we.id_webhook = wh.id INNER JOIN event AS e ON we.id_event = e.id WHERE we.id_event = ?`;
+    const [webhooks] = await db.execute(query,[id]);
+    return webhooks;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}

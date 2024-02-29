@@ -1,0 +1,1 @@
+export const createWebhookEvent : string = ` createWebhookEvent(id_webhook: ID, id_event: ID) : WebhookEvent`;

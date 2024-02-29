@@ -1,0 +1,1 @@
+export const createOrder : string = `createOrder(id_producto: Int, amount: Int): Order`;

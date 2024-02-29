@@ -1,0 +1,1 @@
+export const updateUser : string = ` updateUser(id: ID, email: String, password: String) : User`;

@@ -1,0 +1,1 @@
+export const deleteProduct : string = ` deleteProduct(id: ID) : ID`;

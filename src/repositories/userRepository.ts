@@ -1,5 +1,5 @@
 import { db } from "../config/db";
-import { User } from "../entities/user/userEntity";
+import { User } from "../entities/userEntity";
 
 export const getUsers = async () : Promise<User[]> => {
   try {
@@ -21,22 +21,32 @@ export const getUserByEmail = async (email: string): Promise<User> => {
   }
 };
 
-export const createUser = async (
-  email: string,
-  password: string,
-  url : string
-): Promise<void> => {
+export const getUserById = async (id: number): Promise<User> => {
   try {
-    const query = "insert into users (email, password, url) values (?, ?, ?)";
-    await db.execute(query, [email, password, url]);
+    console.log(id);
+    const query = "select * from users where id = ?";
+    const result : any = await db.execute(query, [id]);
+    return result[0].length > 0 ? result[0][0] : null;
   } catch (err: any) {
     throw new Error(err);
   }
 };
 
-export const update = async (args: any): Promise<void> => {
+export const createUser = async (
+  email: string,
+  password: string
+): Promise<number> => {
   try {
-    const { id, email, password } = args;
+    const query = "insert into users (email, password) values (?, ?)";
+    const result : any = await db.execute(query, [email, password]);
+    return result[0].insertId;
+  } catch (err: any) {
+    throw new Error(err);
+  }
+};
+
+export const updateUser = async ( id: number, email: string, password: string): Promise<void> => {
+  try {
     const query = 'UPDATE users SET email = ?, password = ? WHERE id = ?';
     await db.execute(query,[email, password, id]);
   } catch (error: any) {
@@ -44,9 +54,8 @@ export const update = async (args: any): Promise<void> => {
   }
 };
 
-export const destroy = async (args: any): Promise<void> => {
+export const deleteUser = async (id: number): Promise<void> => {
   try {
-    const id = args.id;
     const query = 'DELETE FROM users WHERE id = ?';
     await db.execute(query,[id]);
   } catch (error: any) {

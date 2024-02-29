@@ -1,0 +1,1 @@
+export const updateProduct : string = ` updateProduct(id: ID, name: String, stock: Int, price: Float) : Product`;

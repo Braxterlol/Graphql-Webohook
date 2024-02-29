@@ -1,4 +1,4 @@
-import { User } from "../../entities/user/userEntity";
+import { User } from "../../entities/userEntity";
 import * as userRepository from "../../repositories/userRepository";
 
 export const getUserService = async (): Promise<User[]> => {

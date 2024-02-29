@@ -1,5 +1,5 @@
 import { db } from "../config/db";
-import { Product } from "../entities/products/productEntity";
+import { Product } from "../entities/productEntity";
 
 export const getProducts = async (): Promise<Product[]> => {
     try {
@@ -41,32 +41,31 @@ export const getByPrice = async (price: number): Promise<Product> => {
     }
 };
 
-export const create = async (args: any) : Promise<void> => {
+export const createProduct = async (name: string, stock: number, price: number) : Promise<number> => {
     try {
-        const { email, password, price} = args;
         const query = 'INSERT INTO products (name, stock, price) VALUES (?,?,?)';
-        await db.execute(query, [email, password, price]);
-    } catch (error) {
+        const result : any = await db.execute(query, [name, stock, price]);
+        return result[0].insertId;
+    } catch (error: any) {
         throw new Error(error);
     }
 };
 
-export const update = async (args: any) : Promise<void> => {
+export const updateProduct = async (id: number, name: string, stock: number, price: number) : Promise<void> => {
     try {
-        const { id, email, password, price} = args;
-        const query = 'UPDATE products SET email = ?, password = ?, price = ? WHERE id = ?';
-        await db.execute(query,[email, password, price, id]);
-    } catch (error) {
+        console.log(id, name, stock, price);
+        const query = 'UPDATE products SET name = ?, stock= ?, price = ? WHERE id = ?';
+        await db.execute(query,[name, stock, price, id]);
+    } catch (error: any) {
         throw new Error(error);
     }
 };
 
-export const destroy = async (args: any) : Promise<void> => {
+export const deleteProduct = async (id: number) : Promise<void> => {
     try {
-        const id = args.id;
-        const query = 'DELET FROM products WHERE id = ?';
+        const query = 'DELETE FROM products WHERE id = ?';
         await db.execute(query,[id]);
-    } catch (error) {
+    } catch (error: any) {
         throw new Error(error);
     }
 }

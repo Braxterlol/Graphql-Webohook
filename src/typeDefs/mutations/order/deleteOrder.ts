@@ -1,0 +1,1 @@
+export const deleteOrder : string = ` deleteOrder(id: ID) : ID`;
